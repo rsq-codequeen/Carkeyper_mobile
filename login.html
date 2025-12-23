@@ -2,108 +2,205 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Functional Login Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Login Flow</title>
   <script src="https://cdn.tailwindcss.com"></script>
-   <link rel="stylesheet" href="tailwind.css">
 </head>
 
-<body class="bg-gray-200 flex justify-center items-center min-h-screen">
+<body class="bg-gray-200 flex justify-center items-center min-h-screen px-4">
 
-  <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden">
+<div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden">
 
-    <!-- Image -->
-    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a"
-      class="w-full h-40 object-cover" />
+  <img src="assigned_vehicles_list.html
+  " class="w-full h-36 object-cover" />
 
-    <!-- Logo -->
-    <div class="text-center mt-6 mb-2">
-      <h1 class="text-xl font-bold text-teal-700">LOGO</h1>
-    </div>
-
-    <!-- Content -->
-    <div class="px-8 pb-8">
-
-      <p class="text-center text-gray-700 font-medium mb-6">
-        Welcome to Greenkeyper!
-      </p>
-
-      <!-- ALERT -->
-      <div id="alertBox" class="hidden mb-4 p-3 rounded text-sm font-semibold"></div>
-
-      <!-- Email -->
-      <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-      <input id="email" type="email" placeholder="Enter your email"
-        class="border w-full rounded-md px-3 py-2 mb-4 outline-none text-sm" />
-
-      <!-- Password -->
-      <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-      <input id="password" type="password" placeholder="Enter your password"
-        class="border w-full rounded-md px-3 py-2 mb-1 outline-none text-sm" />
-
-      <div class="text-right mb-6">
-        <a id="forgotLink" href="#" class="text-xs text-teal-600 hover:underline">
-          Forgot Password?
-        </a>
-      </div>
-
-      <!-- Button -->
-      <button id="loginBtn"
-        class="bg-teal-600 hover:bg-teal-700 w-full py-2 rounded-md text-white font-semibold">
-        Login
-      </button>
-
-      <!-- Sign up -->
-      <p class="text-center text-sm mt-4 text-gray-600">
-        Don’t have an account?
-        <a href="#" class="text-teal-600 font-medium hover:underline">Sign up</a>
-      </p>
-
-    </div>
+  <div class="text-center mt-4">
+    <h1 class="text-xl font-bold text-teal-700">LOGO</h1>
   </div>
 
-  <!-- SCRIPT -->
-  <script>
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-    const loginBtn = document.getElementById("loginBtn");
-    const alertBox = document.getElementById("alertBox");
-    const forgotLink = document.getElementById("forgotLink");
+  <div id="alertBox" class="hidden mx-6 mt-4 p-3 rounded text-sm font-semibold"></div>
 
-    function showAlert(message, color) {
-      alertBox.textContent = message;
-      alertBox.className =
-        "mb-4 p-3 rounded text-sm font-semibold block " + color;
+  <!-- LOGIN -->
+  <div id="loginScreen" class="px-6 pb-8 mt-4">
+    <label class="text-sm font-medium">Email</label>
+    <input id="loginEmail" class="border w-full px-3 py-2 rounded-md mb-4 text-sm"/>
+
+    <label class="text-sm font-medium">Password</label>
+    <div class="relative mb-3">
+      <input id="loginPassword" type="password"
+        class="border w-full px-3 py-2 rounded-md pr-10 text-sm"/>
+      <button onclick="togglePassword('loginPassword', this)"
+        class="absolute right-3 top-2.5 text-xs text-gray-500">SHOW</button>
+    </div>
+
+    <div class="text-right mb-4">
+      <a href="#" onclick="showForgot()" class="text-xs text-teal-600 hover:underline">
+        Forgot Password?
+      </a>
+    </div>
+
+    <button onclick="login()"
+      class="bg-teal-600 hover:bg-teal-700 w-full py-2.5 rounded-md text-white font-semibold">
+      Login
+    </button>
+  </div>
+
+  <!-- FORGOT PASSWORD (EMAIL + CODE) -->
+  <div id="forgotScreen" class="hidden px-6 pb-8 mt-4">
+
+    <label class="text-sm font-medium">Registered Email</label>
+    <input id="forgotEmail"
+      class="border w-full px-3 py-2 rounded-md mb-4 text-sm"/>
+
+    <label class="text-sm font-medium">Verification Code</label>
+    <input id="otpCode" maxlength="6"
+      placeholder="6-digit code"
+      class="border w-full px-3 py-2 rounded-md mb-4 text-sm"/>
+
+    <button onclick="verifyCode()"
+      class="bg-teal-600 w-full py-2.5 rounded-md text-white font-semibold">
+      Verify Code
+    </button>
+
+    <p class="text-center text-xs mt-4">
+      <a href="#" onclick="showLogin()" class="text-teal-600">Back to Login</a>
+    </p>
+  </div>
+
+  <!-- RESET PASSWORD -->
+  <div id="resetScreen" class="hidden px-6 pb-8 mt-4">
+
+    <label class="text-sm font-medium">New Password</label>
+    <div class="relative mb-2">
+      <input id="newPassword" type="password"
+        oninput="checkStrength(this.value)"
+        class="border w-full px-3 py-2 rounded-md pr-10 text-sm"/>
+      <button onclick="togglePassword('newPassword', this)"
+        class="absolute right-3 top-2.5 text-xs text-gray-500">SHOW</button>
+    </div>
+
+    <!-- Strength Meter -->
+    <div class="mb-4">
+      <div class="w-full h-2 bg-gray-200 rounded">
+        <div id="strengthBar" class="h-2 rounded w-0"></div>
+      </div>
+      <p id="strengthText" class="text-xs mt-1 text-gray-600"></p>
+    </div>
+
+    <label class="text-sm font-medium">Confirm Password</label>
+    <input id="confirmPassword"
+      class="border w-full px-3 py-2 rounded-md mb-4 text-sm"/>
+
+    <button onclick="resetPassword()"
+      class="bg-teal-600 w-full py-2.5 rounded-md text-white font-semibold">
+      Change Password
+    </button>
+  </div>
+
+</div>
+
+<script>
+  const alertBox = document.getElementById("alertBox");
+  const strengthBar = document.getElementById("strengthBar");
+  const strengthText = document.getElementById("strengthText");
+
+  const DEMO_CODE = "123456"; // demo OTP
+
+  function showAlert(msg, color) {
+    alertBox.className = `block mx-6 mt-4 p-3 rounded text-sm font-semibold ${color}`;
+    alertBox.textContent = msg;
+  }
+
+  function togglePassword(id, btn) {
+    const input = document.getElementById(id);
+    input.type = input.type === "password" ? "text" : "password";
+    btn.textContent = input.type === "password" ? "SHOW" : "HIDE";
+  }
+
+  function validEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function validPassword(p) {
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(p);
+  }
+
+  function checkStrength(p) {
+    let score = 0;
+    if (p.length >= 8) score++;
+    if (/[A-Z]/.test(p)) score++;
+    if (/[a-z]/.test(p)) score++;
+    if (/\d/.test(p)) score++;
+    if (/[@$!%*?&]/.test(p)) score++;
+
+    const levels = [
+      ["Very Weak","bg-red-500","20%"],
+      ["Weak","bg-orange-500","40%"],
+      ["Fair","bg-yellow-500","60%"],
+      ["Good","bg-blue-500","80%"],
+      ["Strong","bg-green-600","100%"]
+    ];
+
+    if (!p) {
+      strengthBar.style.width = "0";
+      strengthText.textContent = "";
+      return;
     }
 
-    loginBtn.addEventListener("click", () => {
-      const emailVal = email.value.trim();
-      const passVal = password.value.trim();
+    const [text,color,width] = levels[score-1] || levels[0];
+    strengthBar.className = `h-2 rounded ${color}`;
+    strengthBar.style.width = width;
+    strengthText.textContent = text;
+  }
 
-      if (!emailVal || !passVal) {
-        showAlert("Please fill all fields.", "bg-red-200 text-red-700");
-        return;
-      }
+  function login() {
+    if (!validEmail(loginEmail.value))
+      return showAlert("Invalid email.", "bg-red-200 text-red-700");
 
-      // Very basic email check
-      if (!emailVal.includes("@") || !emailVal.includes(".")) {
-        showAlert("Enter a valid email address.", "bg-red-200 text-red-700");
-        return;
-      }
+    if (!validPassword(loginPassword.value))
+      return showAlert("Invalid password format.", "bg-red-200 text-red-700");
 
-      // Demo successful login
-      showAlert("Login successful! Redirecting...", "bg-green-200 text-green-700");
+    showAlert("Login successful!", "bg-green-200 text-green-700");
+  }
 
-      setTimeout(() => {
-        window.location.href = "dashboard.html"; // change this later
-      }, 1200);
-    });
+  function showForgot() {
+    loginScreen.classList.add("hidden");
+    forgotScreen.classList.remove("hidden");
+  }
 
-    forgotLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      alert("Password reset instructions sent to your email!");
-    });
-  </script>
+  function showLogin() {
+    forgotScreen.classList.add("hidden");
+    resetScreen.classList.add("hidden");
+    loginScreen.classList.remove("hidden");
+  }
+
+  function verifyCode() {
+    if (!validEmail(forgotEmail.value))
+      return showAlert("Enter a valid email.", "bg-red-200 text-red-700");
+
+    if (otpCode.value !== DEMO_CODE)
+      return showAlert("Invalid verification code.", "bg-red-200 text-red-700");
+
+    showAlert("Code verified. Set new password.", "bg-green-200 text-green-700");
+
+    setTimeout(() => {
+      forgotScreen.classList.add("hidden");
+      resetScreen.classList.remove("hidden");
+    }, 1000);
+  }
+
+  function resetPassword() {
+    if (!validPassword(newPassword.value))
+      return showAlert("Password does not meet requirements.", "bg-red-200 text-red-700");
+
+    if (newPassword.value !== confirmPassword.value)
+      return showAlert("Passwords do not match.", "bg-red-200 text-red-700");
+
+    showAlert("Password changed successfully!", "bg-green-200 text-green-700");
+
+    setTimeout(showLogin, 1500);
+  }
+</script>
 
 </body>
 </html>
