@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/test.css" />
+    <link rel="stylesheet" href="src/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <title>Submission</title>
+  </head>
+  <body class="flex flex-col">
+    <header class="w-full h-24 bg-primary mb-4 p-4">
+      <div class="flex items-center">
+        <div class="flex gap-3 items-center pt-6 pb-">
+          <a href="#">
+            <i class="fa-solid fa-arrow-left text-white text-lg"></i>
+          </a>
+          <img
+            src="assets/images/submission-clock.png"
+            alt=""
+            class="w-8 h-8"
+          />
+          <p class="text-white font-bold">Submission</p>
+        </div>
+      </div>
+    </header>
+    <section class="w-full bg-gray-50 min-h-screen pb-24">
+      <div
+        class="max-w-md lg:max-w-6xl mx-auto flex flex-col lg:flex-row lg:items-start gap-1 lg:gap-6 lg:pt-8 lg:px-6"
+      >
+        <div class="flex-1 flex flex-col gap-1 lg:gap-6 w-full">
+          <section
+            class="bg-white p-6 border-b lg:border border-gray-300 lg:rounded-2xl lg:shadow-sm"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 flex items-center justify-center text-cyan-500 bg-cyan-50 rounded-lg"
+              >
+                <i class="fa-solid fa-signature text-xl"></i>
+              </div>
+              <h3 class="font-bold text-gray-700">
+                Add Signature
+                <span class="text-gray-400 font-normal">(Required)</span>
+              </h3>
+            </div>
+
+            <div
+              id="signatureTrigger"
+              class="w-full h-20 lg:h-32 border-2 border-dashed border-gray-200 rounded-xl flex items-center justify-center bg-gray-50 cursor-pointer hover:border-cyan-300 transition-colors"
+            >
+              <span class="text-gray-400 text-sm">Add Signature here</span>
+            </div>
+          </section>
+
+          
+          <section
+            class="bg-white p-6 border-b lg:border border-gray-300 lg:rounded-2xl lg:shadow-sm"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 flex items-center justify-center text-gray-700 bg-gray-300 rounded-lg"
+              >
+                <i class="fa-solid fa-file-signature text-xl"></i>
+              </div>
+              <h3 class="font-bold text-gray-700">
+                Add Note
+                <span class="text-gray-400 font-normal">(Optional)</span>
+              </h3>
+            </div>
+
+            <textarea
+              placeholder="Enter Defect details here..."
+              class="w-full h-32 lg:h-48 p-4 border-2 border-gray-100 rounded-xl bg-white focus:border-cyan-500 focus:ring-0 outline-none resize-none transition-all placeholder:text-gray-300"
+            ></textarea>
+          </section>
+        </div>
+
+          <input
+      type="file"
+      id="imageInput"
+      accept="image/*"
+      multiple
+      class="hidden"
+    />
+        <div class="flex-1 w-full min-w-0"> <section class="bg-white p-6 mb-24 border-2 border-gray-200 rounded-lg">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 flex items-center justify-center text-blue-500 bg-blue-50 rounded-lg">
+        <i class="fa-solid fa-image text-xl"></i>
+      </div>
+      <h3 class="font-bold text-gray-700">Add Images <span class="text-gray-400 font-normal">(Optional)</span></h3>
+    </div>
+
+    <div 
+  id="imagePreviewContainer" 
+  class="flex flex-nowrap gap-2 overflow-x-auto pb-4 custom-scrollbar items-center w-full"
+>
+      <div id="uploadTrigger" class="flex-shrink-0 w-32 h-32 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center gap-2 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-all">
+        <i class="fa-solid fa-cloud-arrow-up text-cyan-500 text-xl"></i>
+        <span class="text-[10px] text-center px-2 text-gray-400 leading-tight">Click to upload image</span>
+      </div>
+    </div>
+    </section>
+</div>
+      </div>
+
+      <div
+        class="fixed bottom-0 left-0 w-full p-6 bg-white border-t border-gray-100 shadow-[0_-5px_15px_rgba(0,0,0,0.05)] lg:flex lg:justify-center"
+      >
+        <button
+          class="w-full lg:max-w-lg bg-gradient-to-r from-[#128BAA] via-[#057B99] to-[#116976] hover:brightness-110 text-white py-3 rounded-xl font-bold text-lg transition-all active:scale-[0.98]"
+        >
+          Submit
+        </button>
+      </div>
+    </section>
+
+    <div
+      id="sigModal"
+      class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300"
+    >
+      <div
+        class="bg-white w-full max-w-sm sm:max-w-md rounded-3xl overflow-hidden shadow-2xl relative"
+      >
+        <button
+          id="closeModal"
+          class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+        >
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+
+        <div class="p-6 text-center border-b border-gray-100">
+          <h3 class="font-bold text-gray-800 text-lg">Sign Below</h3>
+          <p class="text-xs text-gray-400">Use your finger, stylus, or mouse</p>
+        </div>
+
+        <div class="w-full bg-gray-50 overflow-hidden">
+          <canvas
+            id="signature-pad"
+            class="w-full h-64 touch-none cursor-crosshair"
+          ></canvas>
+        </div>
+
+        <div class="p-4 flex gap-3 bg-white border-t border-gray-50">
+          <button
+            id="clearSig"
+            class="flex-1 py-3 text-gray-500 font-semibold hover:bg-gray-100 rounded-xl transition-colors border border-gray-100"
+          >
+            Clear
+          </button>
+          <button
+            id="saveSig"
+            class="flex-1 py-3 bg-[#007b8a] text-white font-bold rounded-xl shadow-lg active:scale-95 transition-all"
+          >
+            Save Signature
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <script src="assets/js/submission.js"></script>
+    <script src="assets/js/signature-canvas.js"></script>
+  </body>
+</html>
