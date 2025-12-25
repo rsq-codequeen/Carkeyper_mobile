@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="src/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <title>Fill Checklist</title>
+</head>
+<body class="flex flex-col">
+    <header class="w-full h-24 bg-primary mb-4 p-4">
+        <div class="flex items-center ">
+          <div class="flex gap-3 items-center pt-6 pb-">
+            <a href="#">
+            <i class="fa-solid fa-arrow-left text-white text-lg"></i>
+            </a>
+             <img src="/assets/images/list.png" alt="" class="w-8 h-8">
+            <p class="text-white font-bold">Checklist </p>
+          </div>       
+        </div>
+    </header>
+    <main class="w-full bg-white min-h-screen pb-24">
+  <section class="px-6 py-4 bg-white sticky top-0 z-10">
+    <div class="flex items-center gap-4">
+      <div class="flex-grow bg-gray-200 rounded-full h-2.5">
+        <div id="progressFill" class="bg-[#006666] h-2.5 rounded-full transition-all duration-500" style="width: 30%"></div>
+      </div>
+      <span id="progressText" class="text-sm font-bold text-gray-600">30%</span>
+    </div>
+  </section>
+
+  <section class="relative px-6 py-2">
+    <div class="absolute left-[2.15rem] top-8 bottom-8 w-[1px] bg-gray-200 -z-0"></div>
+
+    <ul class="space-y-8 relative z-10">
+      <li class="flex items-start gap-4 group">
+        <div class="step-number w-8 h-8 rounded-full border-2 border-[#006666] bg-[#006666] text-white flex items-center justify-center flex-shrink-0 text-sm font-bold transition-colors">
+          1
+        </div>
+        <div class="flex-grow pt-1">
+          <p class="text-gray-800 text-sm leading-relaxed">Place Dock/Deck Mats at Nostalgia.</p>
+        </div>
+        <div class="flex items-center gap-3 pt-1">
+          <input type="checkbox" checked class="checklist-item w-5 h-5 rounded border-gray-300 text-[#006666] focus:ring-[#006666]">
+          <i class="fa-solid fa-flag text-gray-300 hover:text-red-400 cursor-pointer transition-colors"></i>
+        </div>
+      </li>
+
+      <li class="flex items-start gap-4 group">
+        <div class="step-number w-8 h-8 rounded-full border-2 border-[#006666] bg-[#006666] text-white flex items-center justify-center flex-shrink-0 text-sm font-bold">
+          2
+        </div>
+        <div class="flex-grow pt-1">
+          <p class="text-gray-800 text-sm leading-relaxed">Switch the Shore Power Dock Station Breakers right to "off."</p>
+        </div>
+        <div class="flex items-center gap-3 pt-1">
+          <input type="checkbox" checked class="checklist-item w-5 h-5 rounded border-gray-300 text-[#006666] focus:ring-[#006666]">
+          <i class="fa-solid fa-flag text-gray-300 hover:text-red-400 cursor-pointer"></i>
+        </div>
+      </li>
+
+      <li class="flex items-start gap-4 group">
+        <div class="step-number w-8 h-8 rounded-full border-2 border-gray-200 bg-white text-gray-400 flex items-center justify-center flex-shrink-0 text-sm font-bold transition-colors">
+          4
+        </div>
+        <div class="flex-grow pt-1">
+          <p class="text-gray-800 text-sm leading-relaxed">Rotate all Three (3) Battery Selectors to "on" with the (1,1,2) Configuration.</p>
+        </div>
+        <div class="flex items-center gap-3 pt-1">
+          <input type="checkbox" class="checklist-item w-5 h-5 rounded border-gray-300 text-[#006666] focus:ring-[#006666]">
+          <i class="fa-solid fa-flag text-gray-300 hover:text-red-400 cursor-pointer"></i>
+        </div>
+      </li>
+      
+      </ul>
+  </section>
+
+  <div class="fixed bottom-0 left-0 w-full p-6 bg-white/80 backdrop-blur-sm">
+    <a href="submission.html">
+    <button class="w-full bg-gradient-to-r from-[#057B99] via-[#019090] to-[#116976] hover:bg-[#437a82] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95">
+      Next
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+    </a>
+  </div>
+</main>
+<script src="assets/js/fill-checklist.js"></script>
+</body>
+</html>
