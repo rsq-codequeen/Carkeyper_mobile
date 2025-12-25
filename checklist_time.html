@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="src/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <title>Checklist time</title>
+</head>
+<body class="flex flex-col">
+    <header class="w-full h-24 bg-primary mb-4 p-4">
+        <div class="flex items-center ">
+          <div class="flex gap-3 items-center pt-6 pb-">
+            <a href="#">
+            <i class="fa-solid fa-arrow-left text-white text-lg"></i>
+            </a>
+            <i class="fa-regular fa-clock text-white text-2xl"></i>
+            <p class="text-white font-bold">Assigned Vehicles</p>
+          </div>       
+        </div>
+    </header>
+    <section class="w-full p-8">
+        <div class="flex w-full h-36 p-8 border-2 rounded-2xl shadow-md gap-14">
+            <img src="/assets/images/truck-boat.png" alt="">
+            <div class="flex flex-col gap-7 items-center">
+                <h1 class="text-lg font-semibold text-center">Assigned vehicle</h1>
+                <h3 class="text-center">Nostalgia</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="w-full">
+        <div class="flex w-full bg-neutral-light h-14 gap-3 px-10 py-3">
+            <div class="flex items-center gap-3 mx-auto">
+            <img src="/assets/images/checklist-time.png" alt="" class="w-8 h-8">
+            <p>Select your checklist time </p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="w-full p-8 flex flex-col sm:flex-row sm:justify-center gap-6 items-center">
+  
+  <a href="fill-checklist.html">
+  <div class="w-72 max-w-sm bg-gradient-to-r from-[#057B99] via-[#4F97AA] to-[#528D96] rounded-[2.5rem] p-8 flex flex-col items-center text-center text-white shadow-xl relative overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02]">
+    <div class="mb-4">
+      <img src="/assets/images/checklist.png" alt="Checklist" class="w-20 h-20 object-contain">
+    </div>
+    
+    <h2 class="text-xl font-bold mb-1">Beginning of the Day</h2>
+    <p class="text-sm opacity-90 mb-6">Checklist Questions <span class="font-bold text-yellow-400">30</span></p>
+    
+    <div class="w-full flex justify-between items-center mt-auto pt-4 border-t border-white/20">
+      <span class="text-lg font-medium">Completed</span>
+      <i class="fa-solid fa-arrow-right text-xl group-hover:translate-x-1 transition-transform"></i>
+    </div>
+  </div>
+  </a>
+  <div class="w-72 max-w-sm bg-white rounded-[2.5rem] p-8 flex flex-col items-center text-center shadow-lg relative overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02] border border-gray-50">
+    <div class="mb-4">
+      <img src="/assets/images/check-clock.png" alt="Clock" class="w-20 h-20 object-contain">
+    </div>
+    
+    <h2 class="text-xl font-bold text-gray-800 mb-1">End of the Day</h2>
+    <p class="text-sm text-gray-500 mb-10">Checklist Questions <span class="font-bold text-teal-600">30</span></p>
+    
+    <div class="w-full flex justify-end mt-auto">
+      <i class="fa-solid fa-arrow-right text-xl text-gray-800 group-hover:translate-x-1 transition-transform"></i>
+    </div>
+  </div>
+
+</section>
+</body>
+</html>
